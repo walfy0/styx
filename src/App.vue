@@ -1,10 +1,15 @@
 <template>
-  <router-view/>
+  <router-view v-if="isRouterAlive"/>
 </template>
 
 <script>
 export default {
   name: 'App',
+  provide () {
+    return {
+      reload: this.reload
+    }
+  },
   created () {
     // 在页面加载时读取localStorage里的状态信息
     if (window.localStorage.getItem('list')) {
@@ -16,6 +21,19 @@ export default {
     window.addEventListener('beforeunload', () => {
       window.localStorage.setItem('list', JSON.stringify(this.$store.state))
     })
+  },
+  data () {
+    return {
+      isRouterAlive: true
+    }
+  },
+  methods: {
+    reload () {
+      this.isRouterAlive = false // 先关闭，
+      this.$nextTick(function () {
+        this.isRouterAlive = true // 再打开
+      })
+    }
   }
 }
 </script>

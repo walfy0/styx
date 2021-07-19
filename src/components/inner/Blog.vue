@@ -1,67 +1,46 @@
 <template>
   <el-container>
   <el-header>
-    <div id="lethe">lethe</div>
-    <el-dropdown>
-      <span class="el-dropdown-link">
-      {{ user }}<i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>info</el-dropdown-item>
-        <el-dropdown-item @click.native="logout">logout</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+    <StyxHeader></StyxHeader>
   </el-header>
   <el-divider></el-divider>
   <el-container>
-    <el-aside>
-      <el-menu
-      default-active="2"
-      class="el-menu-vertical-demo">
-      <el-menu-item index="1" @click.native="blog">
-        <i class="el-icon-menu"></i>
-        <span slot="title">blog</span>
-      </el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
-      </el-menu-item>
-    </el-menu>
+    <el-aside width="240px">
+      <StyxAside></StyxAside>
     </el-aside>
     <el-main>
-      <doc :doc_list="doc_list" :total="total" ref="./doc"/>
+      <div>
+        <el-button id="add_doc" type="primary" @click="AddDoc">new doc</el-button>
+        <el-table
+        :data="doc_list">
+        <el-table-column prop="id" label="id"></el-table-column>
+        <el-table-column prop="status" label="status"></el-table-column>
+        <el-table-column prop="header" label="title"></el-table-column>
+        <el-table-column prop="content" label="content"></el-table-column>
+        <el-table-column prop="ctime" label="create_time"></el-table-column>
+        <el-table-column prop="mtime" label="modify_time"></el-table-column>
+        <el-table-column>
+        <template slot-scope="scope">
+        <el-button @click="editDoc(scope.row)" type="text" size="small">edit</el-button>
+        </template>
+        </el-table-column>
+        </el-table>
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="total" id="pagi">
+        </el-pagination>
+      </div>
     </el-main>
   </el-container>
 </el-container>
 </template>
 
 <script>
-import doc from './doc.vue'
-import global from './../tool/global.vue'
+import StyxHeader from '../common/header.vue'
+import StyxAside from '../common/aside.vue'
 export default {
-  components: { doc },
+  components: { StyxHeader, StyxAside },
   name: 'Blog',
   data () {
     return {
@@ -71,8 +50,7 @@ export default {
     }
   },
   mounted: function () {
-    this.user = global.user
-    console.log(this.user)
+    this.user = this.$store.state.user
     this.axios.post('/lethe/doc/list', {
       params: {
         page: 1,
@@ -90,12 +68,17 @@ export default {
     })
   },
   methods: {
-    logout () {
-      this.axios.get('/lethe/logout').then().catch(error => {
-        console.log(error)
-      })
+    AddDoc () {
       this.$router.push({
-        path: 'login'
+        path: 'new_doc'
+      })
+    },
+    editDoc (row) {
+      this.$store.doc_content = row.content
+      this.$store.doc_title = row.header
+      this.$store.doc_id = row.id
+      this.$router.push({
+        path: 'new_doc'
       })
     }
   }
@@ -103,5 +86,11 @@ export default {
 </script>
 
 <style scope>
-
+#add_doc {
+  float: right;
+}
+#pagi {
+  margin-top: 20px;
+  float: right;
+}
 </style>

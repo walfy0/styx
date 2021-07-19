@@ -1,6 +1,6 @@
 # STYX
 
-> A Vue.js project
+> A web project linke with lethe
 
 ## Build Setup
 

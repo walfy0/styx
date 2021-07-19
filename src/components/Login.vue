@@ -7,9 +7,9 @@
     <el-input v-model="user" placeholder="user" id="user"></el-input>
   </el-form-item>
   <el-form-item id="password">
-    <el-input v-model="password" placeholder="password"></el-input>
+    <el-input v-model="password" placeholder="password" show-password></el-input>
   </el-form-item>
-  <el-form-item>
+  <el-form-item id="login_button">
     <el-button type="success" @click="Register">register</el-button>
     <el-button type="primary" @click="Login">login</el-button>
   </el-form-item>
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import global from './tool/global.vue'
 export default {
   name: 'login',
   data () {
@@ -37,9 +36,8 @@ export default {
       })
         .then((response) => {
           if (response.data.code === '0') {
-            global.user = this.user
-            global.password = this.password
-            global.user_id = response.data.data
+            this.$store.state.user = this.user
+            this.$store.state.user_id = response.data.data
             this.$router.push({
               path: '/home'
             })
@@ -78,17 +76,14 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-#user{
+#user,#password{
     margin: auto;
     width: 50%;
     border: 3px;
-    padding: 20px;
-}
-#password{
-  margin: auto;
-    width: 50%;
-    border: 3px;
     padding: 30px;
+}
+#login_button{
+  text-align: center;
 }
 #el-button {
   margin: auto;

@@ -1,62 +1,68 @@
 <template>
 <el-container>
   <el-header>
-    <div id="lethe">lethe</div>
-    <el-dropdown>
-      <span class="el-dropdown-link">
-      {{ user }}<i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>info</el-dropdown-item>
-        <el-dropdown-item @click.native="logout">logout</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+    <StyxHeader></StyxHeader>
   </el-header>
-      <div>
-        <p id="title_str">title</p>
-        <el-input v-model="title" placeholder="title" id="title"></el-input>
-      </div>
-        <mavon-editor id="editor" v-model="value"/>
-      <div>
-      <el-button type="primary" @click="create" id="create">create</el-button>
-      <el-button type="info" @click="cancel" id="cancel">cancel</el-button>
-      </div>
+    <div>
+      <p id="title_str">title</p>
+      <el-input v-model="doc_title" placeholder="title" id="title"></el-input>
+    </div>
+      <mavon-editor id="editor" v-model="doc_content"/>
+    <div id="add_doc">
+    <el-button type="primary" @click="create" id="create">create</el-button>
+    <el-button type="info" @click="cancel" id="cancel">cancel</el-button>
+    </div>
 </el-container>
 </template>
 
 <script>
-import global from '../tool/global.vue'
+import StyxHeader from '../common/header.vue'
 export default {
+  components: {StyxHeader},
   name: 'NewDoc',
   data () {
     return {
-      title: '',
       user: '',
       user_id: 0,
-      value: ''
+      doc_id: 0,
+      doc_title: '',
+      doc_content: ''
     }
   },
   mounted: function () {
-    this.user = global.user
-    this.user_id = global.user_id
+    this.user = this.$store.state.user
+    this.user_id = this.$store.state.user_id
+    this.doc_id = this.$store.doc_id
+    this.doc_title = this.$store.doc_title
+    this.doc_content = this.$store.doc_content
   },
   methods: {
     create () {
+      this.$store.doc_content = ''
+      this.$store.doc_title = ''
+      this.$store.doc_id = 0
       this.axios.post('/lethe/doc/update', {
-        header: this.title,
-        content: this.value,
+        header: this.doc_title,
+        content: this.doc_content,
+        id: this.doc_id,
         creator: this.user_id
       }).then(response => {
-        global.user = 0
-        global.password = ''
+        this.$message({
+          message: 'create success',
+          type: 'success'
+        })
       }).catch(error => {
         console.log(error)
       })
       this.$router.push({
         path: 'blog'
       })
+      window.location.reload()
     },
     cancel () {
+      this.$store.doc_content = ''
+      this.$store.doc_title = ''
+      this.$store.doc_id = 0
       this.$router.push({
         path: 'blog'
       })
@@ -82,5 +88,8 @@ export default {
 }
 #title, #editor{
   margin-top: 30px;
+}
+#add_doc{
+  text-align: center;
 }
 </style>

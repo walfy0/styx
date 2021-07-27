@@ -13,11 +13,11 @@
     <el-submenu index="3">
         <template slot="title">
             <i class="el-icon-location"></i>
-            <span>导航一</span>
+            <span>other</span>
         </template>
         <el-menu-item-group>
             <template slot="title">分组一</template>
-            <el-menu-item index="3-1">Concurrent</el-menu-item>
+            <el-menu-item index="3-1">love</el-menu-item>
             <el-menu-item index="3-2">选项2</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="分组2">
@@ -30,8 +30,7 @@
             <span>personal center</span>
         </template>
         <el-menu-item-group>
-            <el-menu-item index="4-1">information</el-menu-item>
-            <el-menu-item index="4-2">change information</el-menu-item>
+            <el-menu-item index="4-1" @click.native="info">information</el-menu-item>
         </el-menu-item-group>
     </el-submenu>
   </el-menu>
@@ -58,6 +57,11 @@ export default {
     home () {
       this.$router.push({
         path: 'home'
+      })
+    },
+    info () {
+      this.$router.push({
+        path: 'info'
       })
     }
   }

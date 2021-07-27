@@ -42,10 +42,8 @@ export default {
   mounted: function () {
     this.user = this.$store.state.user
     this.axios.post('/lethe/order/list', {
-      params: {
-        page: 1,
-        page_size: 20
-      }
+      page: 1,
+      page_size: 20
     }).then(response => {
       if (response.data.code === '0') {
         this.order_list = response.data.data
@@ -63,10 +61,14 @@ export default {
         order_id: row.id,
         order_num: 1
       }).then(response => {
-        this.$message({
-          message: 'buy success',
-          type: 'success'
-        })
+        if (response.data.code === '0') {
+          this.$message({
+            message: 'buy success',
+            type: 'success'
+          })
+        } else {
+          this.$message.error(response.data.message)
+        }
       }).catch(error => {
         console.log(error)
       })

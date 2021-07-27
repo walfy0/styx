@@ -15,6 +15,20 @@ Vue.use(mavonEditor)
 Vue.use(VueAxios, axios)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+ElementUI.TableColumn.props.showOverflowTooltip = {type: Boolean, default: true}
+
+router.beforeEach(function (to, from, next) {
+  console.log(store.state.user)
+  if (to.meta.needLogin) {
+    if (store.state.user !== '') {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next()
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

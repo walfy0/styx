@@ -8,7 +8,7 @@
       <el-input v-model="doc_title" placeholder="title" id="title"></el-input>
     </div>
       <mavon-editor id="editor" v-model="doc_content"/>
-    <div id="add_doc">
+    <div id="add_doc" v-if="can_write">
     <el-button type="primary" @click="create" id="create">create</el-button>
     <el-button type="info" @click="cancel" id="cancel">cancel</el-button>
     </div>
@@ -26,7 +26,8 @@ export default {
       user_id: 0,
       doc_id: 0,
       doc_title: '',
-      doc_content: ''
+      doc_content: '',
+      can_write: true
     }
   },
   mounted: function () {
@@ -35,6 +36,9 @@ export default {
     this.doc_id = this.$store.doc_id
     this.doc_title = this.$store.doc_title
     this.doc_content = this.$store.doc_content
+    if (this.$route.query.write) {
+      this.can_write = false
+    }
   },
   methods: {
     create () {

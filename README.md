@@ -1,6 +1,6 @@
 # STYX
 
-> A web project linke with lethe
+> A web project link with lethe
 
 ## Build Setup
 

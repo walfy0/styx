@@ -16,11 +16,12 @@
         <el-table-column prop="id" label="id"></el-table-column>
         <el-table-column prop="status" label="status"></el-table-column>
         <el-table-column prop="header" label="title"></el-table-column>
-        <el-table-column prop="content" label="content"></el-table-column>
+        <el-table-column prop="content" show-overflow-tooltip="true" label="content"></el-table-column>
         <el-table-column prop="ctime" label="create_time"></el-table-column>
         <el-table-column prop="mtime" label="modify_time"></el-table-column>
         <el-table-column>
         <template slot-scope="scope">
+        <el-button @click="viewDoc(scope.row)" type="text" size="small">view</el-button>
         <el-button @click="editDoc(scope.row)" type="text" size="small">edit</el-button>
         </template>
         </el-table-column>
@@ -69,6 +70,9 @@ export default {
   },
   methods: {
     AddDoc () {
+      this.$store.doc_content = ''
+      this.$store.doc_title = ''
+      this.$store.doc_id = 0
       this.$router.push({
         path: 'new_doc'
       })
@@ -79,6 +83,17 @@ export default {
       this.$store.doc_id = row.id
       this.$router.push({
         path: 'new_doc'
+      })
+    },
+    viewDoc (row) {
+      this.$store.doc_content = row.content
+      this.$store.doc_title = row.header
+      this.$store.doc_id = row.id
+      this.$router.push({
+        path: 'new_doc',
+        query: {
+          write: true
+        }
       })
     }
   }

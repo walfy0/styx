@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Blog from '@/components/inner/Blog'
+import Info from '@/components/inner/Info'
 import Register from '@/components/Register'
 import NewDoc from '@/components/inner/NewDoc'
 
@@ -16,7 +17,10 @@ export default new Router({
     {
       path: '/home/',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: {
+        needLogin: true
+      }
     },
     {
       path: '/login',
@@ -29,14 +33,28 @@ export default new Router({
       component: Register
     },
     {
+      path: '/info',
+      name: 'Info',
+      component: Info,
+      meta: {
+        needLogin: true
+      }
+    },
+    {
       path: '/blog',
       name: 'Blog',
-      component: Blog
+      component: Blog,
+      meta: {
+        needLogin: true
+      }
     },
     {
       path: '/new_doc',
       name: 'new_doc',
-      component: NewDoc
+      component: NewDoc,
+      meta: {
+        needLogin: true
+      }
     }
   ]
 })

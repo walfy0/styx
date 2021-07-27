@@ -41,6 +41,10 @@ export default {
             this.$router.push({
               path: '/home'
             })
+            this.$message({
+              message: 'login success',
+              type: 'success'
+            })
           } else {
             console.log(response)
           }

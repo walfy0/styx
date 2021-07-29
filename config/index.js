@@ -59,6 +59,15 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/styx/',
+    proxyTable: {
+      '/lethe': {
+        target: 'http://139.196.100.116:8080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/': ''
+        }
+      }
+    },
 
     /**
      * Source Maps

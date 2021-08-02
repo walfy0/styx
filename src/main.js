@@ -18,9 +18,10 @@ Vue.config.productionTip = false
 ElementUI.TableColumn.props.showOverflowTooltip = {type: Boolean, default: true}
 
 router.beforeEach(function (to, from, next) {
-  console.log(store.state.user)
+  var UserId = JSON.parse(window.localStorage.getItem('list')).user_id
+  // console.log(UserId)
   if (to.meta.needLogin) {
-    if (store.state.user !== '') {
+    if (UserId !== 0) {
       next()
     } else {
       next('/login')

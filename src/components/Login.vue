@@ -46,6 +46,7 @@ export default {
               type: 'success'
             })
           } else {
+            this.$message.error(response.data.message)
             console.log(response)
           }
         })

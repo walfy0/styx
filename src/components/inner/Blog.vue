@@ -53,10 +53,8 @@ export default {
   mounted: function () {
     this.user = this.$store.state.user
     this.axios.post('/lethe/doc/list', {
-      params: {
-        page: 1,
-        page_size: 20
-      }
+      page: 1,
+      page_size: 20
     }).then(response => {
       if (response.data.code === '0') {
         this.doc_list = response.data.data

@@ -76,13 +76,13 @@ export default {
             message: 'start success',
             type: 'success'
           })
+          this.status = true
         } else {
           this.$message.error(response.data.message)
         }
       }).catch(error => {
         console.log(error)
       })
-      window.location.reload()
     },
     restart () {
       this.axios.post('/lethe/hermes/change', {
@@ -95,14 +95,12 @@ export default {
             message: 'retart success',
             type: 'success'
           })
-          this.status = true
         } else {
           this.$message.error(response.data.message)
         }
       }).catch(error => {
         console.log(error)
       })
-      window.location.reload()
     },
     close () {
       this.axios.post('/lethe/hermes/change', {
@@ -122,7 +120,6 @@ export default {
       }).catch(error => {
         console.log(error)
       })
-      window.location.reload()
     }
   }
 }

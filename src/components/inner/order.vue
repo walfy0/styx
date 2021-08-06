@@ -9,18 +9,29 @@
       <StyxAside></StyxAside>
     </el-aside>
     <el-main>
-      test
+      <el-table
+        :data="order_list">
+        <el-table-column prop="id" label="order_id"></el-table-column>
+        <el-table-column prop="status" label="status"></el-table-column>
+        <el-table-column prop="name" label="name"></el-table-column>
+        <el-table-column prop="count" label="count"></el-table-column>
+        <el-table-column>
+        <template slot-scope="scope">
+        <el-button @click="order(scope.row)" type="text" size="small">buy</el-button>
+        </template>
+        </el-table-column>
+        </el-table>
     </el-main>
   </el-container>
 </el-container>
 </template>
 
 <script>
-import StyxHeader from './common/header.vue'
-import StyxAside from './common/aside.vue'
+import StyxHeader from '../common/header.vue'
+import StyxAside from '../common/aside.vue'
 export default {
   components: { StyxHeader, StyxAside },
-  name: 'Home',
+  name: 'Order',
   data () {
     return {
       user: 'welcome',

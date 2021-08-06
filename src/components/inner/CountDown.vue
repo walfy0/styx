@@ -9,18 +9,18 @@
       <StyxAside></StyxAside>
     </el-aside>
     <el-main>
-      test
+      CountDown
     </el-main>
   </el-container>
 </el-container>
 </template>
 
 <script>
-import StyxHeader from './common/header.vue'
-import StyxAside from './common/aside.vue'
+import StyxHeader from '../common/header.vue'
+import StyxAside from '../common/aside.vue'
 export default {
   components: { StyxHeader, StyxAside },
-  name: 'Home',
+  name: 'CountDown',
   data () {
     return {
       user: 'welcome',

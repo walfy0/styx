@@ -16,7 +16,7 @@
         <el-table-column prop="id" label="id"></el-table-column>
         <el-table-column prop="status" label="status"></el-table-column>
         <el-table-column prop="header" label="title"></el-table-column>
-        <el-table-column prop="content" show-overflow-tooltip="true" label="content"></el-table-column>
+        <el-table-column prop="content" show-overflow-tooltip label="content"></el-table-column>
         <el-table-column prop="ctime" label="create_time"></el-table-column>
         <el-table-column prop="mtime" label="modify_time"></el-table-column>
         <el-table-column>

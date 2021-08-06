@@ -7,6 +7,10 @@ import Blog from '@/components/inner/Blog'
 import Info from '@/components/inner/Info'
 import Register from '@/components/Register'
 import NewDoc from '@/components/inner/NewDoc'
+import Order from '@/components/inner/order'
+import CountDown from '@/components/inner/CountDown'
+import HermesService from '@/components/inner/HermesService'
+import HermesClient from '@/components/inner/HermesClient'
 
 Vue.use(Router)
 Vue.use(Vuex)
@@ -52,6 +56,38 @@ export default new Router({
       path: '/new_doc',
       name: 'new_doc',
       component: NewDoc,
+      meta: {
+        needLogin: true
+      }
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: Order,
+      meta: {
+        needLogin: true
+      }
+    },
+    {
+      path: '/count_down',
+      name: 'count_down',
+      component: CountDown,
+      meta: {
+        needLogin: true
+      }
+    },
+    {
+      path: '/hermes_service',
+      name: 'hermes_service',
+      component: HermesService,
+      meta: {
+        needLogin: true
+      }
+    },
+    {
+      path: '/hermes_client',
+      name: 'hermes_client',
+      component: HermesClient,
       meta: {
         needLogin: true
       }

@@ -1,36 +1,49 @@
 <template>
   <el-menu
-    default-active="1"
+    default-active="$route.path"
     class="el-menu-vertical-demo">
-    <el-menu-item index="1" @click.native="home">
+    <el-menu-item index="home" @click.native="home">
         <i class="el-icon-menu"></i>
         <span slot="title">home</span>
     </el-menu-item>
-    <el-menu-item index="2" @click.native="blog">
+    <el-menu-item index="blog" @click.native="blog">
         <i class="el-icon-document"></i>
         <span slot="title">blog</span>
     </el-menu-item>
-    <el-submenu index="3">
+    <el-menu-item index="count down" @click.native="count_down">
+        <i class="el-icon-date"></i>
+        <span slot="title">count down</span>
+    </el-menu-item>
+    <el-menu-item index="order" @click.native="order">
+        <i class="el-icon-goods"></i>
+        <span slot="title">order</span>
+    </el-menu-item>
+    <el-submenu index="4">
         <template slot="title">
-            <i class="el-icon-location"></i>
-            <span>other</span>
+            <i class="el-icon-s-promotion"></i>
+            <span>hermes</span>
         </template>
         <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="3-1">love</el-menu-item>
-            <el-menu-item index="3-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-            <el-menu-item index="3-3">选项3</el-menu-item>
+            <el-menu-item index="hermes_service" @click.native="hermes_service">
+              <i class="el-icon-s-promotion"></i>
+              <span slot="title">service</span>
+            </el-menu-item>
+            <el-menu-item index="hermes_client" @click.native="hermes_client">
+              <i class="el-icon-s-promotion"></i>
+              <span slot="title">client</span>
+            </el-menu-item>
         </el-menu-item-group>
     </el-submenu>
-    <el-submenu index="4">
+    <el-submenu index="5">
         <template slot="title">
             <i class="el-icon-setting"></i>
             <span>personal center</span>
         </template>
         <el-menu-item-group>
-            <el-menu-item index="4-1" @click.native="info">information</el-menu-item>
+            <el-menu-item index="info" @click.native="info">
+              <i class="el-icon-key"></i>
+              <span slot="title">information</span>
+            </el-menu-item>
         </el-menu-item-group>
     </el-submenu>
   </el-menu>
@@ -57,6 +70,26 @@ export default {
     home () {
       this.$router.push({
         path: 'home'
+      })
+    },
+    order () {
+      this.$router.push({
+        path: 'order'
+      })
+    },
+    count_down () {
+      this.$router.push({
+        path: 'count_down'
+      })
+    },
+    hermes_service () {
+      this.$router.push({
+        path: 'hermes_service'
+      })
+    },
+    hermes_client () {
+      this.$router.push({
+        path: 'hermes_client'
       })
     },
     info () {

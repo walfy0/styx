@@ -1,22 +1,48 @@
 <template>
-<html>
-<body id="login_div">
-  <div id="div">
-  <el-form>
-  <el-form-item id="user">
-    <el-input v-model="user" placeholder="user" id="user"></el-input>
-  </el-form-item>
-  <el-form-item id="password">
-    <el-input v-model="password" placeholder="password" show-password></el-input>
-  </el-form-item>
-  <el-form-item id="login_button">
-    <el-button type="success" @click="Register">register</el-button>
-    <el-button type="primary" @click="Login">login</el-button>
-  </el-form-item>
-  </el-form>
+  <div id="login_div">
+    <el-card class="login-form-layout">
+      <el-form
+        autocomplete="on"
+        :model="loginForm"
+        ref="loginForm"
+        label-position="left"
+      >
+        <div style="text-align: center">
+        </div>
+        <h2 class="login-title color-main">登录页面</h2>
+        <el-form-item prop="username">
+          <el-input
+            name="username"
+            type="text"
+            v-model="loginForm.username"
+            autocomplete="on"
+            placeholder="请输入用户名"
+          >
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            name="password"
+            :type="pwdType"
+            @keyup.enter.native="Login"
+            v-model="loginForm.password"
+            autocomplete="on"
+            placeholder="请输入密码"
+            show-password
+          >
+          </el-input>
+        </el-form-item>
+        <el-form-item style="margin-bottom: 60px">
+          <el-button
+            style="width: 100%"
+            type="primary"
+            :loading="loading"
+            @click.native.prevent="Login"
+          >登录</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
   </div>
-</body>
-</html>
 </template>
 
 <script>
@@ -24,19 +50,23 @@ export default {
   name: 'login',
   data () {
     return {
-      user: '',
-      password: ''
+      loginForm: {
+        username: '',
+        password: ''
+      },
+      loading: false,
+      pwdType: 'password'
     }
   },
   methods: {
     Login: function () {
       this.axios.post('/lethe/login', {
-        name: this.user,
-        password: this.password
+        name: this.loginForm.username,
+        password: this.loginForm.password
       })
         .then((response) => {
           if (response.data.code === '0') {
-            this.$store.state.user = this.user
+            this.$store.state.user = this.loginForm.username
             this.$store.state.user_id = response.data.data
             this.$router.push({
               path: '/home'
@@ -66,32 +96,32 @@ export default {
 <style scoped>
 #login_div{
   text-align: center;
-  background-image: url('../assets/login.jpg');
-  background-size: cover;
+  background-image: url('../assets/pixel-heart.png');
+  background-size: 50%;
   position: absolute;
   width: 100%;
   height: 100%;
   margin: 0px;
 }
-#div {
-  text-align: center;
+.login-form-layout {
   position: absolute;
-  width: 90%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 0;
+  right: 0;
+  width: 360px;
+  margin: 140px auto;
+  border-top: 10px solid #409eff;
 }
-#user,#password{
-    margin: auto;
-    width: 50%;
-    border: 3px;
-    padding: 30px;
-}
-#login_button{
+
+.login-title {
   text-align: center;
 }
-#el-button {
-  margin: auto;
-  width: 80%;
+
+.login-center-layout {
+  background: #409eff;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 200px;
 }
 </style>

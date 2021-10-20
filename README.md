@@ -1,5 +1,7 @@
 # STYX
 
+> styx is one of greek underworld river, it's known as the river of hatred...
+> https://en.wikipedia.org/wiki/Greek_underworld
 > A web project link with lethe
 
 ## Build Setup

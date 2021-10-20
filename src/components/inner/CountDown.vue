@@ -9,7 +9,16 @@
       <StyxAside></StyxAside>
     </el-aside>
     <el-main>
-      CountDown
+      <el-calendar v-model="value">
+        <template
+          slot="dateCell"
+          slot-scope="{date, data}">
+          <p :class="data.isSelected ? 'is-selected' : ''">
+            {{ data.day.split('-').slice(1).join('-') }} {{ data.isSelected ? '✔️' : ''}}
+            {{ data.day.split('-').slice(1).join('-') === '10-25' ? '💌' : '' }}
+          </p>
+        </template>
+      </el-calendar>
     </el-main>
   </el-container>
 </el-container>
@@ -25,7 +34,10 @@ export default {
     return {
       user: 'welcome',
       password: '',
-      order_list: []
+      order_list: [],
+      drawer: false,
+      direction: 'btt',
+      message: '4'
     }
   },
   mounted: function () {
@@ -67,6 +79,9 @@ export default {
 </script>
 
 <style scope>
+.is-selected {
+    color: #1989FA;
+  }
 .el-main {
   color: #333;
   text-align: center;

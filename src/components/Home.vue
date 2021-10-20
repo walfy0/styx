@@ -9,17 +9,18 @@
       <StyxAside></StyxAside>
     </el-aside>
     <el-main id="word">
-      <p v-if="user==='two_sheep'">
+      <div v-if="user==='two_sheep'">
         <h1>lethe</h1>
         希腊神话中的河流,为冥界的五条河之一<br>
         亡者到了冥界会被要求喝下忘河的河水，以忘却尘世间的事...<br>
-        希望我们能忘却所有不开心<br>
-      <br>
-      <div id="time">我们在一起已经是<br><br>
+        希望我们能忘却所有不开心<br><br>
+      <span id="time">
+        我们在一起已经是<br>
       <span id="time_day">{{time.day}}</span>&nbsp;&nbsp;&nbsp;&nbsp;天&nbsp;&nbsp;&nbsp;&nbsp;
       <span id="time_hour">{{time.hour}}</span>&nbsp;&nbsp;&nbsp;&nbsp;小时&nbsp;&nbsp;&nbsp;&nbsp;
       <span id="time_minute">{{time.minute}}</span>&nbsp;&nbsp;&nbsp;&nbsp;分钟&nbsp;&nbsp;&nbsp;&nbsp;
       <span id="time_second">{{time.second}}</span>&nbsp;&nbsp;&nbsp;&nbsp;秒&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
       </div>
     </el-main>
   </el-container>

@@ -65,7 +65,7 @@ export default {
     this.timer = setInterval(() => {
       var date = new Date()
       Date.parse(date)
-      date = parseInt(date / 1000) - 1603620000
+      date = parseInt(date / 1000) - 1603627200
       var time = {}
       time.second = date % 60
       date = parseInt(date / 60)
